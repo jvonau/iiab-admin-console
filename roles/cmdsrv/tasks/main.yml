@@ -5,12 +5,10 @@
   package: name={{ item }}
            state=present
   with_items:
-    - libzmq3-dev
-    - python-cracklib
+#    - libzmq3-dev
     - pkg-config
     - sqlite3
     - libapache2-mod-wsgi
-    - python-systemd
   tags:
     - download
   when: is_debuntu
@@ -34,26 +32,6 @@
     - download
   when: is_redhat
 
-- name: Check the config_vars.yml file
-  stat: path=/etc/iiab/config_vars.yml
-  register: config_vars
-
-- name: Ensure config_vars.yml is not empty
-  shell: "cat /etc/iiab/config_vars.yml"
-  register: config_vars_check
-  when: config_vars.stat.exists == true
-
-- name: Install default config_vars.yml
-  template: src=config_vars.yml
-            dest=/etc/iiab/config_vars.yml
-            mode=0644
-  when: config_vars.stat.exists == false or config_vars_check.stdout == ""
-
-# remove after testing
-#- name: put a python interface to iiab.env
-#  template: src=iiab_env.py
-#            dest=/etc/iiab
-
 - name: Install packages for fedora 23+
   package: name=redhat-rpm-config
            state=installed
@@ -62,36 +40,11 @@
 
 #	pip install pyzmq  - didn't use the installed zmq rpm and the target zmq 4, not 3, for which there is no rpm.
 
-- name: Download pyzmq (zeromq and python binding)
-  command: "pip download --dest {{ pip_packages_dir }} pyzmq"
-  # "pip install --download <dir> SomePkg" (below) is DEPRECATED after pip 9.x
-  #pip: name=pyzmq
-  #     extra_args="--download {{ pip_packages_dir }}"
-  when: not use_cache and not no_network
-  tags:
-    - download2
 
-- name: Install pyzmq (zeromq and python binding)
-  pip: name=pyzmq
-       extra_args="--no-index --find-links=file://{{ pip_packages_dir }}"
-
-- name: Set the pear download_dir
-  shell: "pear config-set download_dir {{ iiab_base }}"
-  tags:
-    - download2
-
-- name: Download speedtest-cli
-  command: "pip download --dest {{ pip_packages_dir }} speedtest-cli"
-  # "pip install --download <dir> SomePkg" (below) is DEPRECATED after pip 9.x
-  #pip: name=speedtest-cli
-  #     extra_args="--download {{ pip_packages_dir }}"
-  when: not use_cache and not no_network
-  tags:
-    - download2
-
-- name: Install speedtest-cli
-  pip: name=speedtest-cli
-       extra_args="--no-index --find-links=file://{{ pip_packages_dir }}"
+#- name: Set the pear download_dir
+#  shell: "pear config-set download_dir {{ iiab_base }}"
+#  tags:
+#    - download2
 
 - name: Create cmdsrv directory
   file: path={{ item }}
@@ -102,6 +55,18 @@
   with_items:
     - "{{ cmdsrv_dir }}"
     - "{{ cmdsrv_dir }}/scripts"
+    - "{{ admin_install_base }}/venv"
+
+#  Might need to tinker python2 packages that were once suppiled by apt
+- name: 'Add to Python 2.7 virtual environment for iiab related python2.7 apps'
+  pip:
+    name: [ 'speedtest-cli', 'pyzmq', 'systemd-python', 'cracklib', 'passlib', 'json', 'requests' ]
+    virtualenv: /opt/admin/venv
+    virtualenv_site_packages: no
+    virtualenv_command: /usr/bin/virtualenv
+    virtualenv_python: python2.7
+    extra_args: "--no-cache-dir"
+#       extra_args="--disable-pip-version-check"
 
 - name: Install Command Server Executable
   copy: src=iiab-cmdsrv
