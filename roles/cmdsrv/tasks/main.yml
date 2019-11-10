@@ -60,7 +60,7 @@
 #  Might need to tinker python2 packages that were once suppiled by apt
 - name: 'Add to Python 2.7 virtual environment for iiab related python2.7 apps'
   pip:
-    name: [ 'speedtest-cli', 'pyzmq', 'systemd-python', 'cracklib', 'passlib', 'json', 'requests' ]
+    requirements: "{{ iiab_base }}/iiab-admin-console/python2.deps"
     virtualenv: /opt/admin/venv
     virtualenv_site_packages: no
     virtualenv_command: /usr/bin/virtualenv

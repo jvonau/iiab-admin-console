@@ -1,0 +1,8 @@
+speedtest-cli
+pyzmq
+systemd-python
+cracklib
+passlib 
+json
+request
+
