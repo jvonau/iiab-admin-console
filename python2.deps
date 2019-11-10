@@ -5,4 +5,24 @@ cracklib
 passlib 
 json
 request
+configparser
+PyYAML
+sqlite3
+urllib2
+datetime
+
+# track down
+#import os, sys, syslog, signal
+#from glob import glob
+#import logging
+#import pwd, grp
+#import threading, subprocess
+#import shlex
+#import shutil
+#import xml.etree.ElementTree as ET
+#import re
+#import string
+#import crypt
+#import spwd
+#import socket
 
