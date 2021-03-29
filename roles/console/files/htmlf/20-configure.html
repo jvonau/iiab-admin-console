@@ -13,6 +13,7 @@
 				<li><a href="#confNetFilter">Internet Caching/Filtering</a></li>
 				<li><a href="#confHostapd">Internal Wi-Fi AP</a></li>
 				<li><a href="#confPortal">Server Portal</a></li>
+				<li><a href="#instServices">Services Install</a></li>
 				<li><a href="#confServices">Services Enabled</a></li>
 				<li><a href="#confWhitelist" call-after="getWhitelist">Edit Permitted URLs</a></li>
 			</ul>
@@ -151,6 +152,71 @@
 
 					</form>
 				</div> <!--  Configure Server Portal pane -->
+				<div class="tab-pane" id="instServices"> <!--  Start install  Services Pane -->
+					<h2>Check Each Service to Install</h2>
+					<form role="form" id="instServicesForm">
+						<div class="checkbox">
+							<label>
+								<input type="checkbox" name="moodle_install" id="moodle_install">Moodle, a Courseware Manager and E-Learning Platform.
+							</label>
+						</div>
+						<div class="checkbox">
+							<label>
+								<input type="checkbox" name="kiwix_install" id="kiwix_install">Kiwix, serves Wikipediae and other content from sources below.  You must also install content.
+							</label>
+						</div>
+						<div class="checkbox">
+							<label>
+								<input type="checkbox" name="kalite_install" id="kalite_install">KA Lite, serves Khan Academy videos and Exercises.  You must also install content.
+							</label>
+						</div>
+						<div class="checkbox">
+							<label>
+							  <input type="checkbox" name="kolibri_install" id="kolibri_install">Kolibri, which provides offline access to a wide range of quality, openly licensed educational content.
+						  </label>
+						</div>
+						<div class="checkbox">
+							<label>
+							  <input type="checkbox" name="internetarchive_install" id="internetarchive_install">Internet Archive Decentralized Web that helps you create your own offline digital library e.g. from http://dweb.archive.org
+						  </label>
+						</div>
+						<div class="checkbox">
+							<label>
+								<input type="checkbox" name="calibreweb_install" id="calibreweb_install">Calibre Web, a browser based version of Calibre, an E-Book Platform. You must also install content.
+							</label>
+						</div>
+						<div class="checkbox">
+							<label>
+								<input type="checkbox" name="sugarizer_install" id="sugarizer_install">Sugarizer provides Sugar Labs activities directly on the server.
+							</label>
+						</div>
+						<div class="checkbox">
+							<label>
+							  <input type="checkbox" name="minetest_install" id="minetest_install">Minetest, an open source, educational computer game.
+						  </label>
+						</div>
+						<div class="checkbox">
+							<label>
+								<input type="checkbox" name="elgg_install" id="elgg_install">Elgg, a Social Networking Platform for Student Blogging, File Sharing, and Collaboration.
+							</label>
+						</div>
+						<div class="checkbox">
+							<label>
+								<input type="checkbox" name="nextcloud_install" id="nextcloud_install">Nextcloud is a local server-based facility for sharing files, photos, contacts, calendars, etc.
+							</label>
+						</div>
+						<div class="checkbox">
+							<label>
+								<input type="checkbox" name="samba_install" id="samba_install">Samba provides Network File Sharing.
+							</label>
+						</div>
+						<div class="checkbox">
+							<label>
+								<input type="checkbox" name="cups_install" id="cups_install">CUPS provides support for printers.
+							</label>
+						</div>
+					</form>
+				</div> <!--  install services pane -->
 				<div class="tab-pane" id="confServices"> <!--  Start Configure Services Pane -->
 					<h2>Check Each Service to Enable</h2>
 					<form role="form" id="confServicesForm">
